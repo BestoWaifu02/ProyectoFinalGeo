@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <title>Proyecto Final DRM 68092</title>
+    <style>
+        .map {
+            height: 600px;
+            width: 100%;
+            background-color: black;
+            display: none;
+        }
+    </style>
 </head>
 
 
@@ -23,14 +31,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
+                <li class="nav-item logged-out" style='display:none'>
                     <a class="nav-link" data-toggle="modal" data-target="#signinModal" href="#">SignIn</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logged-out" style='display:none'>
                     <a class="nav-link" data-toggle="modal" data-target="#signupModal" href="#">SignUp</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">LogOut</a>
+                <li class="nav-item logged-in" style='display:none' style='display:none'>
+                    <a class="nav-link" id="logout" href="#">LogOut</a>
                 </li>
 
             </ul>
@@ -38,6 +46,19 @@
     </div>
 </nav>
 
+<!-- Main content -->
+<div id="map" class="map"></div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 posts">
+            <ul class="list-group ">
+
+            </ul>
+        </div>
+    </div>
+
+
+</div>
 
 <!-- Modal SignUp-->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,7 +103,10 @@
                             required />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Signin</button>
+                    <button type="submit" class="btn btn-secondary btn-block">Login</button>
+                    <button type="button" class="btn btn-info btn-block" id="googleLogin">login with Google</button>
+                    <button type="button" class="btn btn-primary btn-block" id="facebookLogin">login with
+                        Facebook</button>
                 </form>
             </div>
 
@@ -102,11 +126,170 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
 
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script>
+        let info = `<h1>Ubicacion Casa 1</h1>
+                <h2>Practica 5 DRM 68092</h2>           
+        `
+        let info2 = `<h1>Ubicacion Casa 2</h1>
+                <h2>Practica 5 DRM 68092</h2>           
+        `
+        let info3 = `<h1>Ubicacion Casa 3</h1>
+                <h2>Practica 5 DRM 68092</h2>           
+        `
+        let info4 = `<h1>Ubicacion Casa 4</h1>
+                <h2>Practica 5 DRM 68092</h2>           
+        `
+        let info5 = `<h1>Ubicacion Casa 5</h1>
+                <h2>Practica 5 DRM 68092</h2>           
+        `
 
+
+
+        function iniciaMapa() {
+            var propiedades = {
+                center: {
+                    lat: 21.153010083052706,
+                    lng: -101.71115266137599
+                },
+                zoom: 16
+            };
+
+            const mapa = document.getElementById('map');
+
+            const map = new google.maps.Map(mapa, propiedades);
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    console.log("position");
+
+                    let posicion = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+            }
+            //Marcador 1
+            let posicion = {
+                lat: 21.153010083052706,
+                lng: -101.71115266137599
+            };
+
+
+            let props = {
+                position: posicion,
+                map,
+                title: "Marker"
+            };
+            const marker = new google.maps.Marker(props);
+
+            map.setCenter(posicion);
+
+            const infowindow = new google.maps.InfoWindow({
+                content: info
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+
+            //Marcador 2
+            let posicion2 = {
+                lat: 21.14953974737009,
+                lng: -101.71028283066734
+
+
+            };
+            let props2 = {
+                position: posicion2,
+                map,
+                title: "Marker"
+            };
+            const marker2 = new google.maps.Marker(props2);
+
+
+            const infowindow2 = new google.maps.InfoWindow({
+                content: info2
+            });
+
+            marker2.addListener("click", () => {
+                infowindow2.open(map, marker2);
+            });
+
+            //Marcador 3
+            let posicion3 = {
+                lat: 21.149059213768226,
+                lng: -101.7138843828528
+
+
+            };
+            let props3 = {
+                position: posicion3,
+                map,
+                title: "Marker"
+            };
+            const marker3 = new google.maps.Marker(props3);
+
+
+            const infowindow3 = new google.maps.InfoWindow({
+                content: info3
+            });
+
+            marker3.addListener("click", () => {
+                infowindow3.open(map, marker3);
+            });
+            //Marcador 4
+            let posicion4 = {
+                lat: 21.15030448738442,
+                lng: -101.71207881190247
+
+
+            };
+            let props4 = {
+                position: posicion4,
+                map,
+                title: "Marker"
+            };
+            const marker4 = new google.maps.Marker(props4);
+
+
+            const infowindow4 = new google.maps.InfoWindow({
+                content: info4
+            });
+
+            marker4.addListener("click", () => {
+                infowindow4.open(map, marker4);
+            });
+            //Marcador 5
+            let posicion5 = {
+                lat: 21.150162979546252,
+                lng: -101.71567478093803
+
+
+            };
+            let props5 = {
+                position: posicion5,
+                map,
+                title: "Marker"
+            };
+            const marker5 = new google.maps.Marker(props5);
+
+
+            const infowindow5 = new google.maps.InfoWindow({
+                content: info5
+            });
+
+            marker5.addListener("click", () => {
+                infowindow5.open(map, marker5);
+            });
+
+
+        }
+    </script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -120,10 +303,14 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-
+        const fs = firebase.firestore()
     </script>
     <!-- Custom Code -->
     <script src="main.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCklgR88CgKokH7bIKeOy1EVmVVHuq4tXo&callback=iniciaMapa"
+        async defer></script>
+
 </body>
 
 </html>
