@@ -8,6 +8,7 @@
     <!-- CDN BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>Proyecto Final DRM 68092</title>
     <style>
         .map {
@@ -23,7 +24,7 @@
 <!-- NAVEGACION -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Residenciales Salle</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,14 +48,40 @@
 </nav>
 
 <!-- Main content -->
+<div class="d-flex justify-content-center">
+    <div class="p-2 bd-highlight">
+        <h3>Ciudad:</h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3 id="Ciudad"></h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3>Pais:</h3>
+    </div>
+    <div class="p-2 bd-highlight">
+
+        <h3 id="Pais"></h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3>Temperatura:</h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3 id="Temp"></h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3>Humedad:</h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3 id="Hum"></h3>
+    </div>
+</div>
+
+
+
 <div id="map" class="map"></div>
 <div class="container p-4">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 posts">
-            <ul class="list-group ">
+    <div class="row posts">
 
-            </ul>
-        </div>
     </div>
 
 
@@ -132,21 +159,79 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script>
-        let info = `<h1>Ubicacion Casa 1</h1>
-                <h2>Practica 5 DRM 68092</h2>           
+        let info = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Paraisos</h5> 
+                <img src='./images/casa1.jpg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
         `
-        let info2 = `<h1>Ubicacion Casa 2</h1>
-                <h2>Practica 5 DRM 68092</h2>           
+        let info2 = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Andares</h5> 
+                <img src='./images/casa2.jpeg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
         `
-        let info3 = `<h1>Ubicacion Casa 3</h1>
-                <h2>Practica 5 DRM 68092</h2>           
+        let info3 = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Rosales</h5> 
+                <img src='./images/casa3.jpg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
         `
-        let info4 = `<h1>Ubicacion Casa 4</h1>
-                <h2>Practica 5 DRM 68092</h2>           
+        let info4 = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Cuevas </h5> 
+                <img src='./images/casa4.jpg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
         `
-        let info5 = `<h1>Ubicacion Casa 5</h1>
-                <h2>Practica 5 DRM 68092</h2>           
+        let info5 = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Cristales</h5> 
+                <img src='./images/casa5.jpg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
         `
+        let info6 = `
+            <div class="card " style="width: 18rem;">
+                <h5 class="card-title">Residencial Cañada</h5> 
+                <img src='./images/casa6.jpg' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  
+                   <div class='container'>
+                    <i class="bi-alarm" style="font-size: 2rem"></i>    
+                    <i class="bi bi-truck" style="font-size: 2rem"></i>    
+                    <i class="bi bi-bank2" style="font-size: 2rem"></i>    
+                    </div>
+        `
+
 
 
 
@@ -285,6 +370,28 @@
 
             marker5.addListener("click", () => {
                 infowindow5.open(map, marker5);
+            });
+            //Marcador 6
+            let posicion6 = {
+                lat: 21.152514863839567,
+                lng: -101.71416513758824
+
+
+            };
+            let props6 = {
+                position: posicion6,
+                map,
+                title: "Marker"
+            };
+            const marker6 = new google.maps.Marker(props6);
+
+
+            const infowindow6 = new google.maps.InfoWindow({
+                content: info6
+            });
+
+            marker6.addListener("click", () => {
+                infowindow6.open(map, marker6);
             });
 
 

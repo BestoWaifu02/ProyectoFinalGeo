@@ -103,10 +103,14 @@ const setupPosts = (data) => {
     data.forEach((doc) => {
       const post = doc.data();
       const li = `
-              <li class='list-group-item list-group-item-action'>
-                  <h5>${post.title}</h5>
-                  <p>${post.description}</p>
-                  </li>
+                  <div class="card col-12 col-sm-6 col-md-4" style="width: 18rem;">
+                  <img src='./images/${post.imagen}' class="card-img-top" alt="...">
+                  <div class="card-body">
+                  <h5 class="card-title">${post.title}</h5>
+                  <p class="card-text">${post.description}.</p>
+                  <a href="https://github.com/BestoWaifu02" class="btn btn-primary">Contacta al vendedor</a>
+                  </div>
+            </div>
           `;
       html += li;
       postList.innerHTML = html;
@@ -131,3 +135,28 @@ auth.onAuthStateChanged((user) => {
     loginCheck(user);
   }
 });
+
+//Consumiendo API Clima
+
+const getClima = async () => {
+  const cityValue = "León";
+  const countryValue = "Mx";
+  WEATHER_KEY = "d4c3616ace82a1c186dd0e884c61bbba";
+
+  const URI = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue},${countryValue}&appid=${WEATHER_KEY}&units=metric`;
+  const response = await fetch(URI);
+  const data = await response.json();
+  console.log(data.main.temp, data.name, data.sys.country);
+
+  const Ciudad = document.getElementById("Ciudad");
+  const Pais = document.getElementById("Pais");
+  const Temp = document.getElementById("Temp");
+  const Hum = document.getElementById("Hum");
+
+  Ciudad.innerHTML = data.name;
+  Pais.innerHTML = data.sys.country;
+  Temp.innerHTML = data.main.temp;
+  Hum.innerHTML = data.main.humidity;
+};
+
+getClima();
