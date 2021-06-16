@@ -1,6 +1,8 @@
 const loggedOutLinks = document.querySelectorAll(".logged-out");
 const loggedInLinks = document.querySelectorAll(".logged-in");
 const map = document.getElementById("map");
+const api = document.getElementById("API");
+
 const loginCheck = (user) => {
   if (user) {
     loggedInLinks.forEach((link) => {
@@ -10,6 +12,7 @@ const loginCheck = (user) => {
       link.style.display = "none";
     });
     map.style.display = "block";
+    api.style.display = "block";
   } else {
     loggedInLinks.forEach((link) => {
       link.style.display = "none";
@@ -18,6 +21,7 @@ const loginCheck = (user) => {
       link.style.display = "block";
     });
     map.style.display = "none";
+    api.style.display = "none";
   }
 };
 
